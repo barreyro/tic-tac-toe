@@ -1,43 +1,57 @@
 $(document).ready(function() {
-  var moves = ["","","",
+  var MOVES = ["","","",
                "","","",
                "","",""];
+  var COMPUTERTURN = false;
+  var COMPUTER;
+  var HUMAN;
 
-  var currentPlayer = "human";
+  $('#board').hide();
+  $('.player-choice').click(function() {
+    HUMAN = $(this).html();
+    if (HUMAN === 'X') {
+      COMPUTER = 'O';
+    } else {
+      COMPUTER = 'X';
+    }
+    $('.player-select').hide();
+    $('#board').fadeIn();
+  });
 
-  function checkWinner(moves, player) {
-    if ((moves[0] === player && moves[1] === player && moves[2] === player) ||
-        (moves[3] === player && moves[4] === player && moves[5] === player) ||
-        (moves[6] === player && moves[7] === player && moves[8] === player) ||
-        (moves[0] === player && moves[6] === player && moves[6] === player) ||
-        (moves[1] === player && moves[4] === player && moves[7] === player) ||
-        (moves[2] === player && moves[5] === player && moves[8] === player) ||
-        (moves[0] === player && moves[4] === player && moves[8] === player) ||
-        (moves[6] === player && moves[4] === player && moves[2] === player)
+  function checkWinner(MOVES, player) {
+    if ((MOVES[0] === player && MOVES[1] === player && MOVES[2] === player) ||
+        (MOVES[3] === player && MOVES[4] === player && MOVES[5] === player) ||
+        (MOVES[6] === player && MOVES[7] === player && MOVES[8] === player) ||
+        (MOVES[0] === player && MOVES[6] === player && MOVES[6] === player) ||
+        (MOVES[1] === player && MOVES[4] === player && MOVES[7] === player) ||
+        (MOVES[2] === player && MOVES[5] === player && MOVES[8] === player) ||
+        (MOVES[0] === player && MOVES[4] === player && MOVES[8] === player) ||
+        (MOVES[6] === player && MOVES[4] === player && MOVES[2] === player)
     ) {
       return true;
     } else {
       return false;
     }
+
   }
 
-  function checkTie(moves) {
-    var totalMoves = moves.join('').length;
+  function checkTie(MOVES) {
+    var totalMoves = MOVES.join('').length;
     var tieStatus = (totalMoves === 9) ? true : false;
     return tieStatus;
   }
 
-  function makeMove(currentPlayer, tilePosition, moves) {
-    var newBoard = moves;
-    var validStatus = (newBoard[tilePosition] === '') ? true : false;
-    var playerMarker = (currentPlayer === 'human') ? 'x' : 'o';
+  function makeValidMove(tilePosition, MOVES) {
+    var validStatus = (MOVES[tilePosition] === '') ? true : false;
+    var playerMarker = (COMPUTERTURN === false) ? 'x' : 'o'; // x denotes humans, o denotes computer
 
     if (validStatus === true) {
-      newBoard[tilePosition] = playerMarker;
-      return newBoard;
+      MOVES[tilePosition] = playerMarker;
+      COMPUTERTURN = true;
+      return true;
     }
     return false;
   }
+
+
 });
-
-

@@ -42,3 +42,18 @@ h1 {
   vertical-align: middle;
   width: 100px;
 }
+
+.miniTile {
+  background: #fff;
+  border-radius: 5px;
+  color: #333;
+  display: inline-block;
+  font-size: 10pt;
+  height: 10px;
+  margin: 0 5px 5px 0;
+  padding-top: 25px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 20px;
+}
