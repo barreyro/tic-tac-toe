@@ -18,7 +18,28 @@ $(document).ready(function() {
     $('#board').fadeIn();
   });
 
-  function checkWinner(MOVES, player) {
+  $('.tile').on('click', function() {
+    var tilePosition = $(this).data().position;
+
+    if (MOVES[tilePosition] === '' && COMPUTERTURN === false) {
+      $(this).html(HUMAN);
+      MOVES[tilePosition] = HUMAN;
+      var winStatus = checkWinner(HUMAN);
+      if (winStatus) {
+        $('#statusMessage').html('you win!');
+      } else {
+        var isTie = checkTie();
+        if (isTie === false) {
+          COMPUTERTURN = true;
+          computerMove(MOVES);
+        } else {
+          $('#statusMessage').html('DRAW!');
+        }
+      }
+    }
+  });
+
+  function checkWinner(player) {
     if ((MOVES[0] === player && MOVES[1] === player && MOVES[2] === player) ||
         (MOVES[3] === player && MOVES[4] === player && MOVES[5] === player) ||
         (MOVES[6] === player && MOVES[7] === player && MOVES[8] === player) ||
@@ -32,26 +53,11 @@ $(document).ready(function() {
     } else {
       return false;
     }
-
   }
 
-  function checkTie(MOVES) {
+  function checkTie() {
     var totalMoves = MOVES.join('').length;
     var tieStatus = (totalMoves === 9) ? true : false;
     return tieStatus;
   }
-
-  function makeValidMove(tilePosition, MOVES) {
-    var validStatus = (MOVES[tilePosition] === '') ? true : false;
-    var playerMarker = (COMPUTERTURN === false) ? 'x' : 'o'; // x denotes humans, o denotes computer
-
-    if (validStatus === true) {
-      MOVES[tilePosition] = playerMarker;
-      COMPUTERTURN = true;
-      return true;
-    }
-    return false;
-  }
-
-
 });
