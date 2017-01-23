@@ -3,15 +3,17 @@ $(document).ready(function() {
                "","","",
                "","",""];
 
+  var currentPlayer = "human";
+
   function checkWinner(moves, player) {
-    if ((move[0] === player && move[1] === player && move[2] === player) ||
-        (move[3] === player && move[4] === player && move[5] === player) ||
-        (move[6] === player && move[7] === player && move[8] === player) ||
-        (move[0] === player && move[6] === player && move[6] === player) ||
-        (move[1] === player && move[4] === player && move[7] === player) ||
-        (move[2] === player && move[5] === player && move[8] === player) ||
-        (move[0] === player && move[4] === player && move[8] === player) ||
-        (move[6] === player && move[4] === player && move[2] === player)
+    if ((moves[0] === player && moves[1] === player && moves[2] === player) ||
+        (moves[3] === player && moves[4] === player && moves[5] === player) ||
+        (moves[6] === player && moves[7] === player && moves[8] === player) ||
+        (moves[0] === player && moves[6] === player && moves[6] === player) ||
+        (moves[1] === player && moves[4] === player && moves[7] === player) ||
+        (moves[2] === player && moves[5] === player && moves[8] === player) ||
+        (moves[0] === player && moves[4] === player && moves[8] === player) ||
+        (moves[6] === player && moves[4] === player && moves[2] === player)
     ) {
       return true;
     } else {
@@ -24,5 +26,18 @@ $(document).ready(function() {
     var tieStatus = (totalMoves === 9) ? true : false;
     return tieStatus;
   }
+
+  function makeMove(currentPlayer, tilePosition, moves) {
+    var newBoard = moves;
+    var validStatus = (newBoard[tilePosition] === '') ? true : false;
+    var playerMarker = (currentPlayer === 'human') ? 'x' : 'o';
+
+    if (validStatus === true) {
+      newBoard[tilePosition] = playerMarker;
+      return newBoard;
+    }
+    return false;
+  }
 });
+
 
