@@ -1,0 +1,44 @@
+body {
+  background: #3394de;
+  padding: 50px;
+  margin: 0 10%;
+}
+
+header {
+  text-align: center;
+}
+
+#controls {
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+}
+
+.board {
+  margin: auto;
+  margin-top: 40px;
+  position:relative;
+  width: 500px;
+}
+
+.row {
+  text-align: center;
+}
+
+.tile {
+  background: #fff;
+  border-radius: 20px;
+  color: #333;
+  display: inline-block;
+  font-size: 3em;
+  height: 75px;
+  margin: 0 10px 10px 0;
+  padding-top: 25px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}
