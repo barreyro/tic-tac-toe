@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var MOVES = ["","","",
+  var BOARD = ["","","",
                "","","",
                "","",""];
   var COMPUTERTURN = false;
@@ -21,9 +21,9 @@ $(document).ready(function() {
   $('.tile').on('click', function() {
     var tilePosition = $(this).data().position;
 
-    if (MOVES[tilePosition] === '' && COMPUTERTURN === false) {
+    if (BOARD[tilePosition] === '' && COMPUTERTURN === false) {
       $(this).html(HUMAN);
-      MOVES[tilePosition] = HUMAN;
+      BOARD[tilePosition] = HUMAN;
       var winStatus = checkWinner(HUMAN);
       if (winStatus) {
         $('#statusMessage').html('you win!');
@@ -31,7 +31,7 @@ $(document).ready(function() {
         var isTie = checkTie();
         if (isTie === false) {
           COMPUTERTURN = true;
-          computerMove(MOVES);
+          computerMove(BOARD);
         } else {
           $('#statusMessage').html('DRAW!');
         }
@@ -40,14 +40,14 @@ $(document).ready(function() {
   });
 
   function checkWinner(player) {
-    if ((MOVES[0] === player && MOVES[1] === player && MOVES[2] === player) ||
-        (MOVES[3] === player && MOVES[4] === player && MOVES[5] === player) ||
-        (MOVES[6] === player && MOVES[7] === player && MOVES[8] === player) ||
-        (MOVES[0] === player && MOVES[6] === player && MOVES[6] === player) ||
-        (MOVES[1] === player && MOVES[4] === player && MOVES[7] === player) ||
-        (MOVES[2] === player && MOVES[5] === player && MOVES[8] === player) ||
-        (MOVES[0] === player && MOVES[4] === player && MOVES[8] === player) ||
-        (MOVES[6] === player && MOVES[4] === player && MOVES[2] === player)
+    if ((BOARD[0] === player && BOARD[1] === player && BOARD[2] === player) ||
+        (BOARD[3] === player && BOARD[4] === player && BOARD[5] === player) ||
+        (BOARD[6] === player && BOARD[7] === player && BOARD[8] === player) ||
+        (BOARD[0] === player && BOARD[6] === player && BOARD[6] === player) ||
+        (BOARD[1] === player && BOARD[4] === player && BOARD[7] === player) ||
+        (BOARD[2] === player && BOARD[5] === player && BOARD[8] === player) ||
+        (BOARD[0] === player && BOARD[4] === player && BOARD[8] === player) ||
+        (BOARD[6] === player && BOARD[4] === player && BOARD[2] === player)
     ) {
       return true;
     } else {
@@ -56,7 +56,7 @@ $(document).ready(function() {
   }
 
   function checkTie() {
-    var totalMoves = MOVES.join('').length;
+    var totalMoves = BOARD.join('').length;
     var tieStatus = (totalMoves === 9) ? true : false;
     return tieStatus;
   }
